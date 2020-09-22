@@ -21,25 +21,18 @@ new Vue({
         title: "Click to add title",
         body: "Click to edit note",
         dropdown: false,
+        titleEdit: false,
+        bodyEdit: false,
       });
       console.log(this.notes[counter].id);
     },
 
-    //changes the body or title depending upon the function call
-    changeContent: function (note, num) {
-      console.log(note);
-      if (num == 1) {
-        let title = prompt("Enter titile");
-        this.notes[note].title = title;
-      } else {
-        let body = prompt("Edit Content");
-        this.notes[note].body = body;
+    //to delete a notte
+    deleteNote: function (noteId) {
+      //confirmation box will ask if you really want to delete the application
+      if (confirm("Do you really want to delete?")) {
+        this.notes.splice(noteId, 1);
       }
     },
-
-    //to delete a notte
-    deleteNote: function(noteId){
-      this.notes.splice(noteId, 1);
-    }
   },
 });

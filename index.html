@@ -39,19 +39,27 @@
 
         <!-- For the note cards -->
         <div v-else class="flex flex-wrap">
-          <div v-for="note in notes" class="flex flex-wrap mt-20 w-2/6">
+          <div v-for="note in notes" class="flex flex-wrap mt-20 w-full lg:w-2/6">
             <div class="max-w-sm rounded shadow-lg m-6 bg-yellow-200">
                 <div class="px-6 py-4">
                   <div class="flex flex-row justify-between">
-                    <div class="font-bold text-xl mb-2" v-on:click="changeContent(note.id, 1)">{{note.title}}</div>
+                    <div v-if="!note.titleEdit" v-on:dblclick="note.titleEdit = !note.titleEdit" class="font-bold text-xl mb-2" >{{note.title}}</div>
+                    <div v-else>
+                      <input v-model="note.title" placeholder="note.title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                      <p class="p-2 text-blue-600 font-semibold" v-on:click="note.titleEdit = !note.titleEdit">Submit</p>
+                    </div>
                     <p class="ml-4" v-on:click="note.dropdown = !note.dropdown">
                       <img src="assets/dots.svg" class="h-6 w-6" alt="opitions">
                     </p>
                   </div>
                  <p v-if="note.dropdown" class="text-red-500" v-on:click="deleteNote(note.id)">Delete</p>
-                  <p class="text-gray-700 text-base" v-on:click="changeContent(note.id, 2)">
+                  <p v-if="!note.bodyEdit" v-on:dblclick="note.bodyEdit = !note.bodyEdit" class="text-gray-700 text-base">
                     {{note.body}} 
                   </p>
+                  <div v-else>
+                    <input v-model="note.body" placeholder="note.body" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <p class="p-2 text-blue-600 font-semibold" v-on:click="note.bodyEdit = !note.bodyEdit">Submit</p>
+                  </div>
                 </div>
           </div>
     </div>
@@ -59,3 +67,5 @@
     <script src="assets/app.js"></script>
   </body>
 </html>
+
+<!-- v-on:click="changeContent(note.id, 1)" -->
