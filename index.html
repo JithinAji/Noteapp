@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- For CSS using tailwind CSS and unwanted files from same is removed using purgecss -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- production version, optimized for size and speed -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>VMNotes</title>
+  </head>
+  <body class="bg-gray-100">
+    <div id="vmNote">
+      <!-- header bar -->
+      <div class="border-b-2 flex flex-row justify-between absolute w-full">
+        <p class="text-2xl m-4 text-gray-800 font-semibold tracking-wide">VMNotes</p>
+        
+        <button
+          class="m-4 float-right bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          id="newNote"
+          v-on:click="addNote()"
+        >
+          New
+        </button>
+      </div>
+      <!-- notes section of VMNote -->
+
+      <!-- No notes so need to show the button -->
+      <div>
+        <div v-if="notesIfEmpty()" class="min-h-screen flex">
+          <button
+            class="mx-auto my-auto h-12 w-20 items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            id="newNote"
+            v-on:click="addNote()"
+          >
+            New
+          </button>
+        </div>
+
+        <!-- For the note cards -->
+        <div v-else class="flex flex-wrap">
+          <div v-for="note in notes" class="flex flex-wrap mt-20 w-2/6">
+            <div class="max-w-sm rounded shadow-lg m-6 bg-yellow-200">
+                <div class="px-6 py-4">
+                  <div class="flex flex-row justify-between">
+                    <div class="font-bold text-xl mb-2" v-on:click="changeContent(note.id, 1)">{{note.title}}</div>
+                    <p class="ml-4" v-on:click="note.dropdown = !note.dropdown">
+                      <img src="assets/dots.svg" class="h-6 w-6" alt="opitions">
+                    </p>
+                  </div>
+                 <p v-if="note.dropdown" class="text-red-500" v-on:click="deleteNote(note.id)">Delete</p>
+                  <p class="text-gray-700 text-base" v-on:click="changeContent(note.id, 2)">
+                    {{note.body}} 
+                  </p>
+                </div>
+          </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
