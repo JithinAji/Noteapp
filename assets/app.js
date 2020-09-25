@@ -24,7 +24,6 @@ new Vue({
         titleEdit: false,
         bodyEdit: false,
       });
-      console.log(this.notes[counter].id);
     },
 
     //to delete a notte
@@ -33,6 +32,20 @@ new Vue({
       if (confirm("Do you really want to delete?")) {
         this.notes.splice(noteId, 1);
       }
+    },
+  },
+  mounted() {
+    console.log("App mounted!");
+    if (localStorage.getItem("notes"))
+      this.notes = JSON.parse(localStorage.getItem("notes"));
+  },
+  watch: {
+    notes: {
+      handler() {
+        console.log("Notes changed!");
+        localStorage.setItem("notes", JSON.stringify(this.notes));
+      },
+      deep: true,
     },
   },
 });

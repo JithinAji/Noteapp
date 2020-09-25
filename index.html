@@ -57,7 +57,7 @@
                     {{note.body}} 
                   </p>
                   <div v-else>
-                    <input v-model="note.body" placeholder="note.body" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <textarea v-model="note.body" placeholder="note.body" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                     <p class="p-2 text-blue-600 font-semibold" v-on:click="note.bodyEdit = !note.bodyEdit">Submit</p>
                   </div>
                 </div>
